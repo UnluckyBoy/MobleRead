@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">移动书城</string>
+    <string name="error">网络连接超时！</string>
+    <string name="about_text">这是一个测试！！！</string>
+    <string name="xianxia">仙侠</string>
+    <string name="wuxia">武侠</string>
+    <string name="dushi">都市</string>
+    <string name="xuanhuan">玄幻</string>
+    <string name="hository">历史</string>
+    <string name="lingyi">灵异</string>
+    <string name="game">游戏</string>
+    <string name="qihuan">奇幻</string>
+    <string name="mingzhu">名著</string>
+    <string name="other">其他</string>
+    <string name="read">阅读历史</string>
+    <string name="help">帮助</string>
+    <string name="about">关于</string>
+    <string name="write">写小说</string>
+    <string name="userbook">用户书架</string>
+</resources>
