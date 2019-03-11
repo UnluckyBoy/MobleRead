@@ -12,9 +12,10 @@ import retrofit2.http.Query;
 
 public interface LoginService {
     //@POST("Login_test")
-    @POST("Login_Run")
+    //@POST("UserLogin")
+    @POST("login")
     Call<IsTrueBean> getState(
-            @Query("Account") String Account,
-            @Query("Pwd") String Pwd
+            @Query("account") String Account,
+            @Query("password") String Pwd
     );
 }

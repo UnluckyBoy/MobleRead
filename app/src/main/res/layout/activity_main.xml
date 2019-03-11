@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a17823.getservicedemo.ui.Fragment.Activity.MainActivity">
+    tools:context="com.example.a17823.getservicedemo.ui.Activity.MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

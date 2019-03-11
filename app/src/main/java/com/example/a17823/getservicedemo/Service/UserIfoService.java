@@ -11,6 +11,6 @@ import retrofit2.http.Query;
  */
 
 public interface UserIfoService {
-    @POST("GetIfo")
-    Call<UserBean> getState(@Query("userKey") String userKey);
+    @POST("userInfo")
+    Call<UserBean> getState(@Query("account") String account);
 }

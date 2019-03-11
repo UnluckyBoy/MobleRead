@@ -9,7 +9,8 @@ import retrofit2.Retrofit;
  */
 
 public class UserIfoApi extends WebApi{
-    String url="http://1oz9819419.iask.in:44216/UserService/";
+    //String url="http://1oz9819419.iask.in:44216/UserService/";
+    String url="http://1oz9819419.iask.in:44216/MobleRedServer/UserController/";
     Retrofit retrofit=getApi(url);
     @Override
     public <T> T getService() {

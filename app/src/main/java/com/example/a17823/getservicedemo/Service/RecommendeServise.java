@@ -10,6 +10,6 @@ import retrofit2.http.GET;
  */
 
 public interface RecommendeServise {
-    @GET("Recommende")
+    @GET("hotest")
     Call<BOOK>getState();
 }

@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="300dp"
@@ -18,7 +19,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="25dp"
+            android:hint="@string/search_hint"/>
 
         <ImageButton
             android:layout_width="50dp"
@@ -126,11 +128,11 @@
             android:text="@string/other"/>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/loadall_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
             android:layout_below="@+id/game"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/loadall_list">
+            android:layout_centerHorizontal="true">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -142,4 +144,5 @@
             android:layout_centerVertical="true" />
 
     </RelativeLayout>
+
 </LinearLayout>

@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Book_File {
     private List<Book_File> FILE;
-    private String id;
-    private String name;
-    private String file;
+    private String book_Id;
+    private String book_name;
+    private String book_file;
 
     public List<Book_File> getFILE() {
         return FILE;
@@ -21,26 +21,26 @@ public class Book_File {
     }
 
     public String getId() {
-        return id;
+        return book_Id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.book_Id = id;
     }
 
     public String getBook_name() {
-        return name;
+        return book_name;
     }
 
     public void setBook_name(String book_name) {
-        this.name = book_name;
+        this.book_name = book_name;
     }
 
     public String getBook_file() {
-        return file;
+        return book_file;
     }
 
     public void setBook_file(String book_file) {
-        this.file = book_file;
+        this.book_file = book_file;
     }
 }

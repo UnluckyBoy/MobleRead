@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -11,19 +11,54 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:gravity="center"/>
-    <TextView
+        -->
+
+    <com.example.a17823.getservicedemo.ui.view.textView
         android:id="@+id/read"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="355dp"
+        android:layout_height="520dp"
+        android:layout_centerHorizontal="true"
+        android:scrollbars="vertical" />
+    <!--android:layout_below="@+id/book_readtitle" -->
+
+    <com.example.a17823.getservicedemo.ui.view.ReadBookView
+        android:id="@+id/read_view"
+        android:layout_width="355dp"
+        android:layout_height="520dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:scrollbars="vertical"
-        android:layout_marginTop="45dp" />
+        android:textIsSelectable="true" />
+        <!--android:text="@string/test_txt" />-->
+
     <ImageView
         android:id="@+id/errorImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Preview"
+            android:onClick="previewPageBtn"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:onClick="nextPageBtn"
+            />
+    </LinearLayout>
+    -->
+
+
 </RelativeLayout>

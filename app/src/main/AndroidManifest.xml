@@ -16,23 +16,24 @@
         android:roundIcon="@mipmap/app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Fragment.Activity.MainActivity">
+        <activity android:name=".ui.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Fragment.Activity.LoginActivity"/>
-        <activity android:name=".ui.Fragment.Activity.RegisterActivity"/>
-        <activity android:name=".ui.Fragment.Activity.SearchBookActivity"/>
-        <activity android:name=".ui.Fragment.Activity.TypeSearchActivity"/>
-        <activity android:name=".ui.Fragment.Activity.UserWriterActivity"/>
-        <activity android:name=".ui.Fragment.Activity.UserReadActivity"/>
-        <activity android:name=".ui.Fragment.Activity.UserHelpActivity"/>
-        <activity android:name=".ui.Fragment.Activity.UserAboutActivity"/>
-        <activity android:name=".ui.Fragment.Activity.ReadActivity"/>
-        <activity android:name=".ui.Fragment.Activity.WebViewActivity"/>
-        <activity android:name=".ui.Fragment.Activity.UserPageActivity"/>
+        <activity android:name=".ui.Activity.LoginActivity"/>
+        <activity android:name=".ui.Activity.RegisterActivity"/>
+        <activity android:name=".ui.Activity.SearchBookActivity"/>
+        <activity android:name=".ui.Activity.TypeSearchActivity"/>
+        <activity android:name=".ui.Activity.UserWriterActivity"/>
+        <activity android:name=".ui.Activity.UserReadActivity"/>
+        <activity android:name=".ui.Activity.UserHelpActivity"/>
+        <activity android:name=".ui.Activity.UserAboutActivity"/>
+        <activity android:name=".ui.Activity.ReadActivity"/>
+        <activity android:name=".ui.Activity.WebViewActivity"/>
+        <activity android:name=".ui.Activity.UserPageActivity"/>
+        <activity android:name=".ui.Activity.Read"/>
     </application>
 
 </manifest>

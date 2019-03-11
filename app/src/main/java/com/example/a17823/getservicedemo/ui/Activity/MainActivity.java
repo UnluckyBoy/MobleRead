@@ -1,10 +1,11 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -50,9 +51,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     }
 
     private void setDefaultFragment() {
+        Intent intent=getIntent();
+        String id=intent.getStringExtra("U_id");
+        //Log.i("MainActivity中的id",id);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        mMainFragment = MainFragment.newInstance("");
+        if(id==null){
+            mMainFragment = MainFragment.newInstance("");
+        }else{
+            mMainFragment = MainFragment.newInstance(id);
+        }
         transaction.replace(R.id.tb, mMainFragment);
         transaction.commit();
     }
@@ -68,14 +76,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         switch (position) {
             case 0:
                 if (mMainFragment == null) {
-                    mMainFragment = MainFragment.newInstance("");
+                    mMainFragment = MainFragment.newInstance(id);
                 }
                 transaction.replace(R.id.tb, mMainFragment);
                 //this.finish();
                 break;
             case 1:
                 if (moreFragment == null) {
-                    moreFragment = MoreFragment.newInstance("");
+                    moreFragment = MoreFragment.newInstance(id);
                 }
                 transaction.replace(R.id.tb, moreFragment);
                 //this.finish();

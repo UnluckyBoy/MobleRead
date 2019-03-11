@@ -1,4 +1,4 @@
-package com.example.a17823.getservicedemo.ui.Fragment.view;
+package com.example.a17823.getservicedemo.ui.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

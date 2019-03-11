@@ -15,18 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.example.a17823.getservicedemo.Api.IsReadApi;
 import com.example.a17823.getservicedemo.Api.LoadallApi;
-import com.example.a17823.getservicedemo.Api.SearchBookApi;
+import com.example.a17823.getservicedemo.OtherController.UpBookHot;
+import com.example.a17823.getservicedemo.OtherController.UpReadHistory;
 import com.example.a17823.getservicedemo.R;
+import com.example.a17823.getservicedemo.Service.IsReadService;
 import com.example.a17823.getservicedemo.Service.LoadallService;
-import com.example.a17823.getservicedemo.Service.SearchBookService;
 import com.example.a17823.getservicedemo.adapter.LoadallAdapter;
+import com.example.a17823.getservicedemo.entities.IsTrueBean;
 import com.example.a17823.getservicedemo.entities.LoadallBean;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.ReadActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.SearchBookActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.TypeSearchActivity;
+import com.example.a17823.getservicedemo.ui.Activity.ReadActivity;
+import com.example.a17823.getservicedemo.ui.Activity.SearchBookActivity;
+import com.example.a17823.getservicedemo.ui.Activity.TypeSearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,9 @@ public class MoreFragment extends Fragment {
     private EditText editText;
     private RecyclerView book_list;
     private ImageView imageView;
-    List<String> mDatas=new ArrayList<String>();
+    //List<String> mDatas=new ArrayList<String>();
     private List<LoadallBean> bookBean=new ArrayList<>();
+    String agrs1=null;
 
     public static MoreFragment newInstance(String param1) {
         MoreFragment fragment = new MoreFragment();
@@ -76,6 +79,12 @@ public class MoreFragment extends Fragment {
             }
         }else{
             v=inflater.inflate(R.layout.more,container,false);
+
+            Bundle bundle = getArguments();
+            agrs1 = bundle.getString("agrs1");
+            if(agrs1!=null){
+                Log.i("MoreFragment中的agrs1=",agrs1);
+            }
 
             Run_Book(v);
             Run_Loadall(v);
@@ -106,7 +115,7 @@ public class MoreFragment extends Fragment {
     private void Run_Loadall(View v) {
         book_list=(RecyclerView) v.findViewById(R.id.loadall_list);
         imageView=v.findViewById(R.id.errorImage);
-        final String[] name = {null};
+        //final String[] name = {null};
         LoadallApi loadallApi=new LoadallApi();
         LoadallService loadallService=loadallApi.getService();
         Call<LoadallBean> loadallBeanCall_list=loadallService.getState();
@@ -119,30 +128,7 @@ public class MoreFragment extends Fragment {
                         //mDatas.add(response.body().getBooklist().get(i).getB_Name());
                         bookBean.add(response.body().getBooklist().get(i));
                     }
-                    Handler handler=new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
-                            book_list.setLayoutManager(linearLayoutManager);
-                            LoadallAdapter loadallAdapter = new LoadallAdapter(getActivity(),bookBean);
-                            loadallAdapter.SetOnItemClickListener(new LoadallAdapter.OnItemClickListener(){
-                                @Override
-                                public void onItemClick(View view, int position) {
-                                    Intent intent=new Intent(getActivity(), ReadActivity.class);
-                                    intent.putExtra("book_id",bookBean.get(position).getB_ID());
-                                    intent.putExtra("book_name", bookBean.get(position).getB_Name());
-                                    startActivity(intent);
-                                }
-
-                                @Override
-                                public void onItemLongClick(View view, int position) {
-
-                                }
-                            });
-                            book_list.setAdapter(loadallAdapter);
-                        }
-                    },1000);
+                    InitBookData(bookBean);
                 }
             }
 
@@ -155,6 +141,10 @@ public class MoreFragment extends Fragment {
     }
 
     public void Run_Book(View v){
+
+        if(agrs1!=null){
+            Log.i("Fragment中Run_Book的",agrs1);
+        }
         editText=(EditText)v.findViewById(R.id.editText);
         search_text=(ImageButton)v.findViewById(R.id.search);
         xianxia=(Button)v.findViewById(R.id.xianxia);
@@ -244,5 +234,73 @@ public class MoreFragment extends Fragment {
                 startActivity(intent_typeSearch);
             }
         }
+    }
+
+    //绑定数据
+    public void InitBookData(final List<LoadallBean> bookList){
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+                book_list.setLayoutManager(linearLayoutManager);
+                LoadallAdapter loadallAdapter = new LoadallAdapter(getActivity(),bookList);
+                loadallAdapter.SetOnItemClickListener(new LoadallAdapter.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(View view, final int position) {
+                        //if((agrs1!=null)&&(bookList.get(position).getB_Name().equals(getRecord.getRecord(agrs1)))){
+                        if(agrs1==null){
+                            Log.i("MoreFragment中的agrs1为空","");
+                            Intent intent=new Intent(getActivity(), ReadActivity.class);
+                            intent.putExtra("book_id",bookList.get(position).getB_ID());
+                            intent.putExtra("book_name", bookList.get(position).getB_Name());
+                            startActivity(intent);
+                        }else{
+                            Log.i("MoreFragment中的agrs1不为空",agrs1);
+                            //IsRead(agrs1,bookList.get(position).getB_Name());
+                            IsReadApi isReadApi=new IsReadApi();
+                            IsReadService isReadService=isReadApi.getService();
+                            Call<IsTrueBean> isTrueBeanCall=isReadService.getState(agrs1,bookList.get(position).getB_Name());
+                            isTrueBeanCall.enqueue(new Callback<IsTrueBean>() {
+                                @Override
+                                public void onResponse(Call<IsTrueBean> call, Response<IsTrueBean> response) {
+                                    if(response.body().getResult().equals("true")){
+                                        //用户已阅读此书
+                                        Log.i("用户"+agrs1,"已阅读过"+bookList.get(position).getB_Name());
+                                        Intent intent=new Intent(getActivity(), ReadActivity.class);
+                                        intent.putExtra("book_id",bookList.get(position).getB_ID());
+                                        intent.putExtra("book_name", bookList.get(position).getB_Name());
+                                        startActivity(intent);
+                                    }else{
+                                        Log.i("用户"+agrs1,"没阅读过"+bookList.get(position).getB_Name());
+                                        UpBookHot upBookHot=new UpBookHot();
+                                        upBookHot.UpHot(bookList.get(position).getB_Name());
+                                        //添加书籍到阅读记录
+                                        UpReadHistory upReadHistory=new UpReadHistory();
+                                        upReadHistory.UpHistory(agrs1,bookList.get(position).getB_Name());
+
+                                        Intent intent=new Intent(getActivity(), ReadActivity.class);
+                                        intent.putExtra("book_id",bookList.get(position).getB_ID());
+                                        intent.putExtra("book_name", bookList.get(position).getB_Name());
+                                        startActivity(intent);
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<IsTrueBean> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+
+                    }
+                });
+                book_list.setAdapter(loadallAdapter);
+            }
+        },1000);
     }
 }

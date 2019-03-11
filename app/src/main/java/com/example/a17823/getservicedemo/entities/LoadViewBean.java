@@ -7,69 +7,67 @@ import java.util.List;
  */
 
 public class LoadViewBean {
-    private List<LoadViewBean> advertise;
+    private String id;
     private String name;
     private String pic;
-    private String head;
+    private String writer;
+    private String type;
+    private String hot;
+    private List<LoadViewBean> Book;
 
-    public List<LoadViewBean> getViewBean() {
-        return advertise;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setViewBean(List<LoadViewBean> viewBean) {
-        this.advertise = viewBean;
-    }
-    public String getPic_url() {
-        return pic;
+    public String getId() {
+        return id;
     }
 
-    public void setPic_url(String pic_url) {
-        this.pic = pic;
-    }
-
-    public String getTitle() {
-        return name;
-    }
-
-    public void setTitle(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getHead() {
-        return head;
+    public String getName() {
+        return name;
     }
 
-    public void setHead(String head) {
-        this.head = head;
+    public String getHot() {
+        return hot;
     }
 
-    /*public static class AdvertiseView {
-        private String name;
-        private String pic;
-        private String head;
+    public String getPic() {
+        return pic;
+    }
 
-        public String getPic_url() {
-            return pic;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public void setPic_url(String pic_url) {
-            this.pic = pic;
-        }
+    public String getWriter() {
+        return writer;
+    }
 
-        public String getTitle() {
-            return name;
-        }
+    public void setHot(String hot) {
+        this.hot = hot;
+    }
 
-        public void setTitle(String name) {
-            this.name = name;
-        }
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 
-        public String getHead() {
-            return head;
-        }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-        public void setHead(String head) {
-            this.head = head;
-        }
-    }*/
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public List<LoadViewBean> getBook() {
+        return Book;
+    }
+
+    public void setBook(List<LoadViewBean> book) {
+        this.Book = book;
+    }
 }

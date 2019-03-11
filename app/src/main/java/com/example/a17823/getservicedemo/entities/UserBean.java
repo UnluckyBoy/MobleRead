@@ -12,6 +12,7 @@ public class UserBean {
     private String account;
     private String pwd;
     private String head;
+    private String sex;
 
     public List<UserBean> getUser() {
         return user;
@@ -51,5 +52,13 @@ public class UserBean {
 
     public String getHead() {
         return head;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

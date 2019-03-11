@@ -1,7 +1,8 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.method.ScrollingMovementMethod;
@@ -13,9 +14,16 @@ import com.example.a17823.getservicedemo.Api.FileApi;
 import com.example.a17823.getservicedemo.R;
 import com.example.a17823.getservicedemo.Service.FileService;
 import com.example.a17823.getservicedemo.entities.Book_File;
+import com.example.a17823.getservicedemo.ui.view.ReadBookView;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +41,10 @@ public class ReadActivity extends Activity{
     private TextView bookView=null,bookname=null;
     private List<Book_File> text=new ArrayList<>();
     private String file=null,title=null;
+    private int position;
+    private ReadBookView readBookView;
+    private BufferedReader reader;
+    CharBuffer buffer = CharBuffer.allocate(5000);//加载5000个字
     //private URL url;
 
     @Override
@@ -44,11 +56,13 @@ public class ReadActivity extends Activity{
         keyId=intent.getStringExtra("book_id");
         //Toast.makeText(this,key,Toast.LENGTH_SHORT).show();
         initData(key);
+        //loadPage(0);
     }
 
     protected void initData(String key){
-        bookView=(TextView) findViewById(R.id.read);
-        bookname=findViewById(R.id.book_readtitle);
+        //bookView=(TextView) findViewById(R.id.read);
+        readBookView=findViewById(R.id.read_view);
+        //bookname=findViewById(R.id.book_readtitle);
         FileApi fileApi=new FileApi();
         FileService fileService=fileApi.getService();
         Call<Book_File> fileCall=fileService.getState(keyId);
@@ -59,9 +73,12 @@ public class ReadActivity extends Activity{
                     Log.i("读书","2333333");
                     file=response.body().getFILE().get(0).getBook_file();
                     title=response.body().getFILE().get(0).getBook_name();
-                    bookname.setText(title);
-                    bookView.setText(file);
-                    bookView.setMovementMethod(ScrollingMovementMethod.getInstance());
+                    //bookname.setText(title);
+                    setTitle(title);
+                    //bookView.setText(file);
+                    loadBook(file);
+                    loadPage(0);
+                    //bookView.setMovementMethod(ScrollingMovementMethod.getInstance());
                 }else {
                     Toast.makeText(ReadActivity.this,"暂无数据",Toast.LENGTH_SHORT).show();
                     Intent intent_back=new Intent(ReadActivity.this,MainActivity.class);
@@ -76,4 +93,39 @@ public class ReadActivity extends Activity{
             }
         });
     }
+
+    /**
+     * 将电子书都一部分到缓冲区
+     */
+    private void loadBook(String book) {
+        /*AssetManager assets = getAssets();
+        try {
+            InputStream in = assets.open("documents/The Golden Compass.txt");
+            Charset charset = CharsetDetector.detect(in);
+            reader = new BufferedReader(new InputStreamReader(in, charset));
+            reader.read(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        try {
+            InputStream   bookcode   =   new ByteArrayInputStream(book.getBytes("UTF-8"));
+            //Charset charset=
+            reader = new BufferedReader(new InputStreamReader(bookcode));
+            reader.read(buffer);
+            //Log.i("缓冲区：",reader.readLine());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 从指定位置开始载入一页
+     */
+    private void loadPage(int position) {
+        buffer.position(position);
+        readBookView.setText(buffer);
+    }
+
 }

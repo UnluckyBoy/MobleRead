@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  */
 
 public interface SearchBookService {
-    @POST("Searchbook")
+    @POST("searchBook")
     Call<LoadallBean> getState(
             @Query("Key") String Key
             );

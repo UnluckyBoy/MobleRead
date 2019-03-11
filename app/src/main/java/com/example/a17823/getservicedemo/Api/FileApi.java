@@ -9,8 +9,9 @@ import retrofit2.Retrofit;
  */
 
 public class FileApi extends WebApi{
-    String url="http://1oz9819419.iask.in:44216/UserService/";
+    //String url="http://1oz9819419.iask.in:44216/MobleRead/";
     //String url="http://192.168.16.111:8080/UserService/";
+    String url="http://1oz9819419.iask.in:44216/MobleRedServer/BookController/";
     Retrofit retrofit=getApi(url);
     @Override
     public <T> T getService() {

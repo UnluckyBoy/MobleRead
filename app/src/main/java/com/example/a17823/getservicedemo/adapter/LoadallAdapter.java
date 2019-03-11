@@ -47,6 +47,7 @@ public class LoadallAdapter extends RecyclerView.Adapter<LoadallAdapter.ViewHold
         }
 
         holder.book_title.setText(bookBean.get(position).getB_Name());
+        holder.book_hot.setText(bookBean.get(position).getB_Hot());
         holder.writer.setText(bookBean.get(position).getB_Writer());
         holder.type.setText(bookBean.get(position).getB_Type());
 
@@ -85,6 +86,7 @@ public class LoadallAdapter extends RecyclerView.Adapter<LoadallAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView book_firstpage;
         private TextView book_title;
+        private TextView book_hot;
         private TextView writer;
         private TextView type;
         //public ImageView book_pic;
@@ -93,6 +95,7 @@ public class LoadallAdapter extends RecyclerView.Adapter<LoadallAdapter.ViewHold
             super(itemView);
             book_firstpage=itemView.findViewById(R.id.book_image);
             book_title=itemView.findViewById(R.id.book_title);
+            book_hot=itemView.findViewById(R.id.hot);
             writer=itemView.findViewById(R.id.b_writer);
             type=itemView.findViewById(R.id.b_type);
         }

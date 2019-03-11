@@ -11,6 +11,6 @@ import retrofit2.http.Query;
  */
 
 public interface FileService {
-        @POST("BookFile")
-        Call<Book_File> getState(@Query("name") String name);
+        @POST("loadFile")
+        Call<Book_File> getState(@Query("BookKey") String BookKey);
 }

@@ -11,9 +11,9 @@ import retrofit2.http.Query;
  */
 
 public interface RegisterService {
-    @POST("Register")
+    @POST("register")
     Call<IsTrueBean> getState(
             @Query("account") String Account,
-            @Query("Pwd") String Pwd
+            @Query("password") String Pwd
     );
 }

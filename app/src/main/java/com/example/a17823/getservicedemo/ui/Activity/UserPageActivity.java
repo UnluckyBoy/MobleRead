@@ -1,4 +1,4 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,13 +1,9 @@
 package com.example.a17823.getservicedemo.ui.Fragment;
 
 import android.app.Fragment;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -16,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,21 +24,17 @@ import com.example.a17823.getservicedemo.Service.UpnameService;
 import com.example.a17823.getservicedemo.Service.UserIfoService;
 import com.example.a17823.getservicedemo.entities.IsTrueBean;
 import com.example.a17823.getservicedemo.entities.UserBean;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.LoginActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.UserAboutActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.UserHelpActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.UserReadActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.Activity.UserWriterActivity;
-import com.example.a17823.getservicedemo.ui.Fragment.view.CirecleImageView;
+import com.example.a17823.getservicedemo.ui.Activity.LoginActivity;
+import com.example.a17823.getservicedemo.ui.Activity.UserAboutActivity;
+import com.example.a17823.getservicedemo.ui.Activity.UserHelpActivity;
+import com.example.a17823.getservicedemo.ui.Activity.UserReadActivity;
+import com.example.a17823.getservicedemo.ui.Activity.UserWriterActivity;
+import com.example.a17823.getservicedemo.ui.view.CirecleImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import cn.bingoogolapple.photopicker.activity.BGAPhotoPickerActivity;
 import okhttp3.MediaType;
@@ -65,7 +56,7 @@ public class MyFragment extends Fragment{
     private EditText A_Name;
     private View view;
     AlertDialog alertDialog;
-    String agrs1;
+    String agrs1=null;
 
     public static MyFragment newInstance(String param1) {
         MyFragment fragment = new MyFragment();
@@ -104,7 +95,9 @@ public class MyFragment extends Fragment{
             Userpage(view);
             UserRun(view);
         }*/
+        //Log.i("MyFragment用户模块",agrs1);
         if(agrs1!=null){
+            Log.i("MyFragment用户模块",agrs1);
             initData(view,agrs1);
         }
 
@@ -277,9 +270,20 @@ public class MyFragment extends Fragment{
                     startActivity(intent_writer);
                     break;
                 case R.id.read:
-                    intent_read=new Intent(getActivity(), UserReadActivity.class);
+                    if(agrs1==null){
+                        Toast.makeText(getActivity(),"用户未登录！请登录。。。",Toast.LENGTH_SHORT).show();
+                        break;
+                    }else{
+                        intent_read=new Intent(getActivity(), UserReadActivity.class);
+                        Log.i("MyFragment用户跳转阅读记录",agrs1);
+                        intent_read.putExtra("user",agrs1);//传用户账户至UserReadActivity
+                        startActivity(intent_read);
+                        break;
+                    }
+                    /*intent_read=new Intent(getActivity(), UserReadActivity.class);
+                    Log.i("MyFragment用户跳转阅读记录",agrs1);
                     startActivity(intent_read);
-                    break;
+                    break;*/
                 case R.id.help:
                     intent_help=new Intent(getActivity(), UserHelpActivity.class);
                     startActivity(intent_help);

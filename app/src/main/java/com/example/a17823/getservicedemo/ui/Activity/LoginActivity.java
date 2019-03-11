@@ -1,4 +1,4 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;

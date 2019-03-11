@@ -7,58 +7,67 @@ import java.util.List;
  */
 
 public class BOOK {
-    private String B_ID;
-    private String B_Name;
-    private String B_Pic;
-    private String B_Writer;
-    private String B_Type;
-    private List<BOOK> book;
+    private String id;
+    private String name;
+    private String pic;
+    private String writer;
+    private String type;
+    private String hot;
+    private List<BOOK> Book;
 
-    public void setB_ID(String b_ID) {
-        B_ID = b_ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getB_ID() {
-        return B_ID;
+    public String getId() {
+        return id;
     }
 
-    public List<BOOK> getList() {
-        return book;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setList(List<BOOK> list) {
-        this.book = list;
+    public String getName() {
+        return name;
     }
 
-    public String getB_Name() {
-        return B_Name;
+    public String getHot() {
+        return hot;
     }
 
-    public void setB_Name(String b_Name) {
-        B_Name = b_Name;
+    public String getPic() {
+        return pic;
     }
 
-    public String getB_Pic() {
-        return B_Pic;
+    public String getType() {
+        return type;
     }
 
-    public void setB_Pic(String b_Pic) {
-        B_Pic = b_Pic;
+    public String getWriter() {
+        return writer;
     }
 
-    public String getB_Writer() {
-        return B_Writer;
+    public void setHot(String hot) {
+        this.hot = hot;
     }
 
-    public void setB_Writer(String b_Writer) {
-        B_Writer = b_Writer;
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
-    public String getB_Type() {
-        return B_Type;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setB_Type(String b_Type) {
-        B_Type = b_Type;
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public List<BOOK> getBook() {
+        return Book;
+    }
+
+    public void setBook(List<BOOK> book) {
+        this.Book = book;
     }
 }

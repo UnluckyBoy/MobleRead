@@ -1,4 +1,4 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a17823.getservicedemo.Api.TypeSearchApi;
 import com.example.a17823.getservicedemo.R;
@@ -63,32 +62,7 @@ public class TypeSearchActivity extends AppCompatActivity{
                     for(int i=0;i<response.body().getBooklist().size();i++){
                         typelist.add(response.body().getBooklist().get(i));
                     }
-                    Handler handler=new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(TypeSearchActivity.this);
-                            typeView.setLayoutManager(linearLayoutManager);
-                            TypeSearchAdapter typeSearchAdapter=new TypeSearchAdapter(TypeSearchActivity.this,typelist);
-                            typeSearchAdapter.SetOnItemClickListener(new TypeSearchAdapter.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(View view, int position) {
-                                    Intent intent=new Intent(TypeSearchActivity.this, ReadActivity.class);
-                                    intent.putExtra("book_id",typelist.get(position).getB_ID());
-                                    intent.putExtra("book_name", typelist.get(position).getB_Name());
-                                    startActivity(intent);
-                                }
-
-                                @Override
-                                public void onItemLongClick(View view, int position) {
-
-                                }
-                            });
-                            typeView.setAdapter(typeSearchAdapter);
-                        }
-                    },1000);
-                }else{
-
+                    InitSearchData(typelist);
                 }
             }
 
@@ -97,5 +71,33 @@ public class TypeSearchActivity extends AppCompatActivity{
                 imageView.setImageResource(R.drawable.notdata);
             }
         });
+    }
+
+    //绑定数据
+    public void InitSearchData(final List<LoadallBean> listBean){
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayoutManager linearLayoutManager=new LinearLayoutManager(TypeSearchActivity.this);
+                typeView.setLayoutManager(linearLayoutManager);
+                TypeSearchAdapter typeSearchAdapter=new TypeSearchAdapter(TypeSearchActivity.this,listBean);
+                typeSearchAdapter.SetOnItemClickListener(new TypeSearchAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent=new Intent(TypeSearchActivity.this, ReadActivity.class);
+                        intent.putExtra("book_id",listBean.get(position).getB_ID());
+                        intent.putExtra("book_name", listBean.get(position).getB_Name());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+
+                    }
+                });
+                typeView.setAdapter(typeSearchAdapter);
+            }
+        },1000);
     }
 }

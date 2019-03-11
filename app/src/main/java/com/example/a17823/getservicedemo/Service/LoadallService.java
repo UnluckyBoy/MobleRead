@@ -11,6 +11,6 @@ import retrofit2.http.POST;
  */
 
 public interface LoadallService {
-    @GET("LoadAllBook")
+    @GET("loadAll")
     Call<LoadallBean> getState();
 }

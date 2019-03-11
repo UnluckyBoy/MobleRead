@@ -1,4 +1,4 @@
-package com.example.a17823.getservicedemo.ui.Fragment.Activity;
+package com.example.a17823.getservicedemo.ui.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,10 +28,9 @@ public class WebViewActivity extends Activity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
-        //LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        //LinearLayout parent = (LinearLayout) inflater.inflate(R.layout.webview, null);
-        Intent intent=getIntent();
-        head=intent.getStringExtra("Url");
+        //Intent intent=getIntent();
+        //head=intent.getStringExtra("Url");
+        head="https://github.com/UnluckyBoy/MobleRead";
         initData(head);
     }
 
@@ -51,7 +50,6 @@ public class WebViewActivity extends Activity{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.i("拦截","233333");
                 if(url.equals(null)) {
-                    //Toast.makeText(WebViewActivity.this,"广告链接为空",Toast.LENGTH_SHORT).show();
                     url="www.baidu.com";
                     return true;
                 }

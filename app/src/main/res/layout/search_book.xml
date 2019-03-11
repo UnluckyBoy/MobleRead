@@ -14,12 +14,11 @@
             android:id="@+id/bookName"/>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/bookName"
-            android:layout_centerHorizontal="true"
             android:id="@+id/search_list"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:layout_below="@+id/bookName"
+            android:layout_centerHorizontal="true">
 
         </android.support.v7.widget.RecyclerView>
 

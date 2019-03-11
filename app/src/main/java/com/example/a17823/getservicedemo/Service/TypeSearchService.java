@@ -11,6 +11,6 @@ import retrofit2.http.Query;
  */
 
 public interface TypeSearchService {
-    @POST("TypeSearch")
-    Call<LoadallBean> getState(@Query("type") String type);
+    @POST("typeSearch")
+    Call<LoadallBean> getState(@Query("Type") String Type);
 }
